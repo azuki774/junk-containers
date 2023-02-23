@@ -1,0 +1,5 @@
+FROM alpine:latest
+RUN apk add --no-cache bash \ 
+ && apk add --no-cache curl
+COPY scripts/dropbox_upload.sh /var/dropbox_upload.sh
+ENTRYPOINT ["/var/dropbox_upload.sh"]
