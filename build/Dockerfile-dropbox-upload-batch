@@ -1,0 +1,10 @@
+# FROM alpine:latest
+# RUN apk add --no-cache bash \ 
+#     && apk add --no-cache curl  \
+#     && apk add --no-cache jq
+# COPY scripts/dropbox_upload.sh /var/dropbox_upload.sh
+# ENTRYPOINT ["/var/dropbox_upload.sh"]
+FROM ubuntu:latest
+RUN apt update && apt-get install -y jq curl
+COPY scripts/dropbox_upload.sh /var/dropbox_upload.sh
+ENTRYPOINT ["/var/dropbox_upload.sh"]
