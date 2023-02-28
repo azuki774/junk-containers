@@ -1,0 +1,3 @@
+FROM mysql:8.0
+COPY scripts/mysql_dump.sh /var/mysql_dump.sh
+ENTRYPOINT ["/var/mysql_dump.sh"]
