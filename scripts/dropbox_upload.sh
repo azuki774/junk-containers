@@ -56,9 +56,9 @@ do
 
     rm -f ${LOCAL_FILE}
 
-done < /tmp/FILELIST
+    # 空ディレクトリは消す
+    find . -mindepth 1 -type d -empty | xargs --no-run-if-empty rm -r
 
-# 空ディレクトリは消す
-find . -type d -empty | xargs rm -r
+done < /tmp/FILELIST
 
 rm -f /tmp/FILELIST
