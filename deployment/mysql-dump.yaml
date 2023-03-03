@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  mysql-dump:
+    image: mysql-dump:latest
+    container_name: mysql-dump
+    environment:
+    - DB_USER=root
+    - DB_PASS=password
+    - DB_HOST=mariadb
+    - DB_NAME=database
+    networks:
+      - ci_network
+
+networks:
+  ci_network:
+    external: true
