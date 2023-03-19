@@ -43,7 +43,7 @@ do
     --header "Authorization: Bearer ${ACCESS_TOKEN}" \
     --header "Dropbox-API-Arg: {\"autorename\":false,\"mode\":\"add\",\"mute\":false,\"path\":\"${REMOTE_FILE}\",\"strict_conflict\":false}" \
     --header "Content-Type: application/octet-stream" \
-    --data-binary ${LOCAL_FILE})
+    --data-binary @${LOCAL_FILE})
 
     body=`echo "$response" | sed '$d'`
     httpstatus=`echo "$response" | tail -n 1`
