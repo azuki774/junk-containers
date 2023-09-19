@@ -17,3 +17,12 @@ ${RSYNC_BIN} -e 'ssh -i ${SSH_KEY} \
 -o StrictHostKeyChecking=no' \
 -avz ${USER}@${TARGET_HOST}:${SRC_DIR}/* \ 
 ${DST_DIR}
+
+
+for FILE in ${DST_DIR};
+do
+if [ ! -s $FILE ]; then
+  echo "0 bytes file exists"
+  exit 1
+fi
+done
