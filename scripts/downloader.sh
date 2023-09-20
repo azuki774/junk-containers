@@ -15,9 +15,10 @@ echo "SRC_DIR=${SRC_DIR}"
 echo "DST_DIR=${DST_DIR}"
 echo "USER=${USER}"
 echo "TARGET_HOST=${TARGET_HOST}"
+echo "SSH_KEY=${SSH_KEY}"
 
 mkdir -p ${DST_DIR}
-${RSYNC_BIN} -e 'ssh -i ${SSH_KEY} -o StrictHostKeyChecking=no' \
+${RSYNC_BIN} -e "ssh -i ${SSH_KEY} -o StrictHostKeyChecking=no" \
 -avz ${USER}@${TARGET_HOST}:${SRC_DIR}/* \
 ${DST_DIR}
 
