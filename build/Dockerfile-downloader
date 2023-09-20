@@ -1,0 +1,4 @@
+FROM ubuntu:latest
+RUN apt-get update && apt-get install -y rsync openssh-client && rm -rf /var/lib/apt/lists/*
+COPY scripts/downloader.sh /var/downloader.sh
+ENTRYPOINT ["/var/downloader.sh"]
