@@ -11,11 +11,14 @@ DST_DIR=`echo ${DST_DIR} | sed "s/YYYYMMDD/${YYYYMMDD}/g"`
 DST_DIR=`echo ${DST_DIR} | sed "s/YYYYMM/${YYYYMM}/g"`
 RSYNC_BIN=/usr/bin/rsync
 
+echo "SRC_DIR=${SRC_DIR}"
+echo "DST_DIR=${DST_DIR}"
+echo "USER=${USER}"
+echo "TARGET_HOST=${TARGET_HOST}"
 
 mkdir -p ${DST_DIR}
-${RSYNC_BIN} -e 'ssh -i ${SSH_KEY} \
--o StrictHostKeyChecking=no' \
--avz ${USER}@${TARGET_HOST}:${SRC_DIR}/* \ 
+${RSYNC_BIN} -e 'ssh -i ${SSH_KEY} -o StrictHostKeyChecking=no' \
+-avz ${USER}@${TARGET_HOST}:${SRC_DIR}/* \
 ${DST_DIR}
 
 
