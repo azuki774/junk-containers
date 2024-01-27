@@ -9,7 +9,7 @@ on:
       - "**"
 
 jobs:
-  e2e:
+  e2e_mysql:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -21,13 +21,28 @@ jobs:
         run: |
           until mysql -u root -ppassword -h 127.0.0.1 -e '\q'; do sleep 1; done
 
-      - name: test e2e (mysql-dump)
+      - name: test e2e run (1)
         run: scripts/mysql_dump.sh
         env:
           DB_HOST: 127.0.0.1
           DB_USER: root
           DB_PASS: password
           DB_NAME: database
+
+      - name: test e2e check (1)
+        run: ls -lad /tmp/backup/`date +%Y%m`/`date +%Y%m%d`.sql.tar.gz
+
+      - name: test e2e run (2)
+        run: scripts/mysql_dump.sh
+        env:
+          DB_HOST: 127.0.0.1
+          DB_USER: root
+          DB_PASS: password
+          DB_NAME: database
+          FILE_NAME: manual_filename
+
+      - name: test e2e check (2)
+        run: ls -lad /tmp/backup/manual_filename.sql.tar.gz
 
     services:
       mariadb:
