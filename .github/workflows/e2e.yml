@@ -17,5 +17,23 @@ jobs:
       - name: build images
         run: make build
 
+      - name: Ready for DB
+        run: |
+          until mysql -u root -ppassword -h 127.0.0.1 -e '\q'; do sleep 1; done
+
       - name: test e2e (mysql-dump)
-        run: make test
+        run: scripts/mysql_dump.sh
+        env:
+          DB_HOST: 127.0.0.1
+          DB_USER: root
+          DB_PASS: password
+          DB_NAME: database
+
+    services:
+      mariadb:
+        image: mariadb:10.7.3
+        env:
+          MYSQL_DATABASE: database
+          MYSQL_ROOT_PASSWORD: password
+        ports:
+          - 3306:3306
