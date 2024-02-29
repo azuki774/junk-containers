@@ -27,7 +27,7 @@ echo "make YYYYMM directory"
 mkdir -p ${FILE_DIR}
 
 echo "mysqldump and output sql file"
-/usr/bin/mysqldump --skip-column-statistics -u ${DB_USER} -p${DB_PASS} -h ${DB_HOST} ${DB_NAME} > "${FILE_DIR}/${FILE_NAME}.sql"
+/usr/bin/mysqldump --skip-column-statistics --single-transaction -u ${DB_USER} -p${DB_PASS} -h ${DB_HOST} ${DB_NAME} > "${FILE_DIR}/${FILE_NAME}.sql"
 cd ${FILE_DIR}
 
 echo "compress sql file"
