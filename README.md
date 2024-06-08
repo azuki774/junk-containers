@@ -4,4 +4,4 @@
 - 指定のディレクトリに含まれるファイルを、ディレクトリ構造そのままに dropbox に upload していく
 
 ## mysql-dump
-- mysqldump して sql ファイルを圧縮したものを、`/tmp/backup/YYYYMM/YYYYMMDD.sql.tag.gz` に配置する
+- mysqldump して sql ファイルを圧縮したものを、`/tmp/backup/YYYYMM/YYYYMMDD.sql.tar.gz` に配置する
