@@ -1,0 +1,7 @@
+FROM debian:bullseye-slim
+RUN apt-get update && \
+    apt-get install -y mariadb-client && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+COPY scripts/mysql_dump.sh /var/mysql_dump.sh
+ENTRYPOINT ["/var/mysql_dump.sh"]
