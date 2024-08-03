@@ -1,4 +1,0 @@
-FROM debian:stable-slim
-RUN apt update && apt-get install -y jq curl && rm -rf /var/lib/apt/lists/*
-COPY scripts/dropbox_upload.sh /var/dropbox_upload.sh
-ENTRYPOINT ["/var/dropbox_upload.sh"]
