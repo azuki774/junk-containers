@@ -22,7 +22,7 @@ jobs:
           until mysql -u root -ppassword -h 127.0.0.1 -e '\q'; do sleep 1; done
 
       - name: test e2e run (1)
-        run: scripts/mysql_dump.sh
+        run: build/mysql-dump/mysql_dump.sh
         env:
           DB_HOST: 127.0.0.1
           DB_USER: root
@@ -33,7 +33,7 @@ jobs:
         run: ls -lad /tmp/backup/`date +%Y%m`/`date +%Y%m%d`.sql.tar.gz
 
       - name: test e2e run (2)
-        run: scripts/mysql_dump.sh
+        run: build/mysql-dump/mysql_dump.sh
         env:
           DB_HOST: 127.0.0.1
           DB_USER: root
