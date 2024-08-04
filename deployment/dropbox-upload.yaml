@@ -1,8 +1,0 @@
-version: '3'
-
-services:
-  dropbox-upload-batch:
-    image: dropbox-upload-batch:latest
-    container_name: dropbox-upload-batch
-    env_file:
-      - dropbox.env

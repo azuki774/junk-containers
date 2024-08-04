@@ -1,7 +1,5 @@
 # junk-containers
 
-## dropbox-uploader-batch
-- 指定のディレクトリに含まれるファイルを、ディレクトリ構造そのままに dropbox に upload していく
-
 ## mysql-dump
 - mysqldump して sql ファイルを圧縮したものを、`/tmp/backup/YYYYMM/YYYYMMDD.sql.tar.gz` に配置する
+- 環境変数: `FILENAME` セット時は、`/tmp/backup/${FILE_NAME}.sql.tar.gz` に mysqldump を保存する。
