@@ -5,4 +5,4 @@ SHELL=/bin/bash
 build:
 	docker build -t mysql-dump:latest -f build/mysql-dump/Dockerfile .
 run:
-	docker compose -f deployment/dropbox-upload.yaml up
+	docker compose -f deployment/mysql-dump.yaml up
