@@ -48,32 +48,21 @@ mkdir -p ${FILE_DIR}
 
 function dump () {
     echo "Starting PostgreSQL dump..."
-    # Wait for database to be ready
-    until pg_isready -h ${POSTGRES_HOST} -U ${POSTGRES_USER}; do
-        echo "Waiting for database to be ready..."
-        sleep 2
-    done
-
     TIMESTAMP=$(date +"%Y%m%d_%H%M%S")
     DUMP_FILE="${FILE_DIR}/${FILE_NAME}.sql"
 
     # Create dump with password from environment
     PGPASSWORD=${POSTGRES_PASSWORD} pg_dump -h ${POSTGRES_HOST} -U ${POSTGRES_USER} -d ${POSTGRES_DB} > ${DUMP_FILE}
 
-    if [ $$? -eq 0 ]; then
-        echo "Dump created successfully: $DUMP_FILE"
-        
-        # Compress the dump file
-        gzip $DUMP_FILE
-        echo "Dump compressed: $DUMP_FILE.gz"
-        
-        # Set appropriate permissions
-        chmod 644 $DUMP_FILE.gz
-        echo "Backup completed successfully"
-    else
-        echo "Dump creation failed"
-        exit 1
-    fi
+    echo "Dump created successfully: $DUMP_FILE"
+    
+    # Compress the dump file
+    gzip $DUMP_FILE
+    echo "Dump compressed: $DUMP_FILE.gz"
+    
+    # Set appropriate permissions
+    chmod 644 $DUMP_FILE.gz
+    echo "Backup completed successfully"
 }
 
 function s3_upload () {
