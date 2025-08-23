@@ -10,6 +10,7 @@ set -e
 # env list
 # POSTGRES_USER
 # POSTGRES_DB
+# POSTGRES_HOST
 # POSTGRES_PASSWORD
 
 # FILE_NAME
@@ -48,7 +49,7 @@ mkdir -p ${FILE_DIR}
 function dump () {
     echo "Starting PostgreSQL dump..."
     # Wait for database to be ready
-    until pg_isready -h db -U ${POSTGRES_USER}; do
+    until pg_isready -h ${POSTGRES_HOST} -U ${POSTGRES_USER}; do
         echo "Waiting for database to be ready..."
         sleep 2
     done
@@ -57,7 +58,7 @@ function dump () {
     DUMP_FILE="${FILE_DIR}/${FILE_NAME}.sql"
 
     # Create dump with password from environment
-    PGPASSWORD=${POSTGRES_PASSWORD} pg_dump -h db -U ${POSTGRES_USER} -d ${POSTGRES_DB} > ${DUMP_FILE}
+    PGPASSWORD=${POSTGRES_PASSWORD} pg_dump -h ${POSTGRES_HOST} -U ${POSTGRES_USER} -d ${POSTGRES_DB} > ${DUMP_FILE}
 
     if [ $$? -eq 0 ]; then
         echo "Dump created successfully: $DUMP_FILE"
